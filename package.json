@@ -2,6 +2,7 @@
   "name": "southard-homes-llc",
   "type": "module",
   "version": "1",
+  "packageManager": "npm@10.9.8",
   "private": true,
   "scripts": {
     "dev": "astro dev",
