@@ -2,11 +2,6 @@
 import Button from "./ui/button.astro";
 
 const web3formsKey = import.meta.env.PUBLIC_WEB3FORMS_KEY;
-
-//TODO: remove this
-//For debugging purposes, you log the key to ensure it's being accessed correctly
-console.log("test");
-console.log("CURRENT ACTIVE KEY:", web3formsKey);
 ---
 
 <form
@@ -94,6 +89,9 @@ console.log("CURRENT ACTIVE KEY:", web3formsKey);
 </style>
 
 <script is:inline>
+  console.log("BROWSER VERIFICATION KEY:", document.getElementsByName("access_key")[0]?.value);
+  console.log("test");
+
   const form = document.getElementById("form");
   const result = document.getElementById("result");
 
