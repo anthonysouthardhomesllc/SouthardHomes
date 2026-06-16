@@ -2,6 +2,7 @@
   "name": "southard-homes-llc",
   "type": "module",
   "version": "1",
+  "packageManager": "npm@10.9.8",
   "private": true,
   "scripts": {
     "dev": "astro dev",
@@ -13,7 +14,7 @@
   "dependencies": {
     "@astrojs/mdx": "^3.0.1",
     "@astrojs/partytown": "^2.1.2",
-    "@astrojs/sitemap": "^3.1.5",
+    "@astrojs/sitemap": "3.1.5",
     "@astrojs/tailwind": "^5.1.0",
     "@fontsource-variable/bricolage-grotesque": "^5.0.6",
     "@fontsource-variable/inter": "^5.0.18",
@@ -36,7 +37,8 @@
     "astro-seo": "^0.8.3",
     "cloudinary": "^2.5.1",
     "sharp": "^0.33.4",
-    "tailwindcss": "^3.4.3"
+    "tailwindcss": "^3.4.3",
+    "zod": "^3.25.76"
   },
   "devDependencies": {
     "@iconify/icons-mdi": "^1.2.48"
