@@ -7,6 +7,9 @@ import Listings from "@components/Listings.astro";
 import { CldVideoPlayer } from 'astro-cloudinary';
 import RTOListings from "./RTO-Listings.astro";
 import RentalListings from "./Rental-Listings.astro";
+
+// Pull the cloud name from environment variables to make Netlify's scanner happy
+const cloudName = import.meta.env.PUBLIC_CLOUDINARY_CLOUD_NAME;
 ---
 <main>
 
@@ -34,7 +37,7 @@ import RentalListings from "./Rental-Listings.astro";
     class="absolute object-cover min-w-full min-h-full max-w-none"
   >
     <source
-      src="https://res.cloudinary.com/dqfotf1jf/video/upload/v1735690280/terretownclips2024_-_Made_with_Clipchamp_4_qtgdjz.mp4"
+      src={`https://res.cloudinary.com/${cloudName}/video/upload/v1735690280/terretownclips2024_-_Made_with_Clipchamp_4_qtgdjz.mp4`}
       type="video/mp4"
     />
     Your browser does not support the video tag.
@@ -59,31 +62,12 @@ import RentalListings from "./Rental-Listings.astro";
 </div>
 </article>
 
-<!-- <article>
-<h2 class="text-3xl pb-8 lg:text-4xl xl:text-5xl font-bold lg: tracking-tight xl:tracking-tighter mt-4 justify-center flex pt-8">
-  Available Rent-To-Own Homes</h2>
-  <p class="py-1">
-    Southard Homes LLC offers a <strong>15-year contract</strong> for our RTO homes, and the house is yours upon completion. 
-</p>
-<p class="py-1">
-    We buy local properties and bring them to their proper glory thanks to our other Quality Companies: Quality Roofing of Indiana LLC, Quality Electric of Indiana LLC, and Quality Excavating of Indiana LLC.
-</p>
-<p class="py-1">
-Our RTOs require you to secure <strong>Renter's Insurance</strong>, and a down payment <strong>equal to the monthly rent amount</strong>  - follow the link and <strong>fill out an application on doorloop</strong> and we will be in contact with you soon!
-</p>    
-
-<a href="tel:812-243-2759" target="_blank" class="text-[#ffca28] font-bold">Call us</a> any time to talk about inventory and options.
-<div class="w-full relative mt-6 flex flex-col md:flex-row gap-3 items-center md:justify-start">
-  <RTOListings />
-</div>
-</article> -->
-
 <article>
  <h2 class="pb-8 text-3xl lg:text-4xl xl:text-5xl font-bold lg: tracking-tight xl:tracking-tighter mt-4 justify-center flex pt-8">
   Available Rental Homes</h2>
   <p class="py-1">
     Just like our RTO options, we improve on existing housing inventory with our in-house contractors to give local homeseekers more flexible options. <br/>
-        See one you like? Submit an application through our tenant portal on <a href="https://southardhomesllc.app.doorloop.com/tenant-portal/rental-applications/listing?companyId=6747587dc1f13e76f53fc0f8&source=CompanyLink" target="_blank" class="text-[#ffca28] font-bold">Doorloop</a>*.</br>
+    See one you like? Submit an application through our tenant portal on <a href="https://southardhomesllc.app.doorloop.com/tenant-portal/rental-applications/listing?companyId=6747587dc1f13e76f53fc0f8&source=CompanyLink" target="_blank" class="text-[#ffca28] font-bold">Doorloop</a>*.</br>
     </p>
     <p class="italic py-1">Deposit: $1,650 (refundable), no pets allowed. </p>
     <p class="italic py-1"><span class="underline">Doorloop Note:</span> A $30 application fee will be processed upon submission to cover the cost of a background check, TransUnion report, and credit card processing fee.</p>
@@ -96,9 +80,10 @@ Our RTOs require you to secure <strong>Renter's Insurance</strong>, and a down p
 </section>
 </main>
 
-<style>
+<style define:vars={{ backgroundImage: `url(https://res.cloudinary.com/${cloudName}/image/upload/t_Banner%2016:9/v1726861810/Home_sj51i5.jpg)` }}>
   #imgBkg {
-    background-image: url("https://res.cloudinary.com/dqfotf1jf/image/upload/t_Banner 16:9/v1726861810/Home_sj51i5.jpg");
+    /* Uses Astro define:vars to inject the environment variable cleanly into CSS */
+    background-image: var(--backgroundImage);
     background-repeat: no-repeat;
     width: screen;
     height: screen;
