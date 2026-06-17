@@ -4,32 +4,12 @@ import Container from "@components/container.astro";
 import Sectionhead from "@components/sectionhead.astro";
 import { v2 as cloudinary } from 'cloudinary';
 
-//Load environment variables from .env file
-const rawUrl = import.meta.env.CLOUDINARY_URL || process.env.CLOUDINARY_URL || '';
+//Fetch keys directly using Astro/Vite's native environment loaders
+const cloudName = import.meta.env.PUBLIC_CLOUDINARY_CLOUD_NAME || process.env.PUBLIC_CLOUDINARY_CLOUD_NAME;
+const apiKey = import.meta.env.SECRET_CLOUDINARY_API_KEY || process.env.SECRET_CLOUDINARY_API_KEY;
+const apiSecret = import.meta.env.SECRET_CLOUDINARY_API_SECRET || process.env.SECRET_CLOUDINARY_API_SECRET;
 
-let cloudName = '';
-let apiKey = '';
-let apiSecret = '';
-
-//Set up Cloudinary credentials from CLOUDINARY_URL if available
-if (rawUrl && rawUrl.startsWith('cloudinary://')) {
-  const cleanUrl = rawUrl.replace('cloudinary://', '');
-  const [credentials, cloud] = cleanUrl.split('@');
-  const [key, secret] = credentials.split(':');
-  
-  cloudName = cloud;
-  apiKey = key;
-  apiSecret = secret; 
-}
-
-//If CLOUDINARY_URL is not set or is invalid, fall back to individual environment variables
-if (!cloudName) {
-  cloudName = import.meta.env.PUBLIC_CLOUDINARY_CLOUD_NAME || process.env.PUBLIC_CLOUDINARY_CLOUD_NAME || '';
-  apiKey = import.meta.env.PUBLIC_CLOUDINARY_API_KEY || process.env.PUBLIC_CLOUDINARY_API_KEY || '';
-  apiSecret = import.meta.env.CLOUDINARY_API_SECRET || process.env.CLOUDINARY_API_SECRET || '';
-}
-
-//Define an interface for gallery items
+// Define an interface for gallery items
 interface GalleryItem {
   url: string;
   largeUrl: string;
@@ -37,7 +17,6 @@ interface GalleryItem {
   date: Date;
 }
 
-//Inject variables straight into the configuration instance
 cloudinary.config({
   cloud_name: cloudName,
   api_key: apiKey,
