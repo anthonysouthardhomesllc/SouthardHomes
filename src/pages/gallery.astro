@@ -1,0 +1,81 @@
+---
+import Layout from "@layouts/Layout.astro";
+import Container from "@components/container.astro";
+import Sectionhead from "@components/sectionhead.astro";
+import { v2 as cloudinary } from 'cloudinary';
+import dotenv from 'dotenv';
+
+//Force load root local .env file manually so Node and Vite are perfectly synchronized
+dotenv.config();
+
+//Define an interface for gallery items
+interface GalleryItem {
+  url: string;
+  publicId: string;
+  date: Date;
+}
+
+cloudinary.config({
+  cloud_name: import.meta.env.PUBLIC_CLOUDINARY_CLOUD_NAME,
+  api_key: import.meta.env.PUBLIC_CLOUDINARY_API_KEY,
+  api_secret: process.env.CLOUDINARY_API_SECRET || import.meta.env.CLOUDINARY_API_SECRET,
+  secure: true
+});
+
+const { resources } = await cloudinary.search
+  .expression('folder:SHLLC-Gallery')
+  .with_field('context')  
+  .with_field('image_metadata') 
+  .max_results(100)
+  .execute();
+
+const galleryItems: GalleryItem[] = resources.map((image: any) => {
+  return {
+    url: image.secure_url,
+    publicId: image.public_id,
+    
+    date: image.image_metadata?.DateTimeOriginal 
+      ? new Date(image.image_metadata.DateTimeOriginal) 
+      : new Date(image.created_at),
+  };
+});
+
+const sortedGallery = galleryItems.sort((a: GalleryItem, b: GalleryItem) => b.date.getTime() - a.date.getTime());
+
+console.log("Cloudinary Config Check:", {
+  name: import.meta.env.PUBLIC_CLOUDINARY_CLOUD_NAME,
+  key: import.meta.env.PUBLIC_CLOUDINARY_API_KEY,
+  secret: !!(import.meta.env.CLOUDINARY_API_SECRET || process.env.CLOUDINARY_API_SECRET)
+});
+---
+
+<Layout title="Gallery">
+    <Container>
+        <div class="bg-cover bg-center py-28 drop-shadow-sm" id="aboutBg">
+            <Sectionhead>
+                <Fragment slot="title">Gallery</Fragment>
+                <Fragment slot="desc"></Fragment>
+            </Sectionhead>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+            {sortedGallery.map((item) => (
+                <div class="bg-zinc-900 rounded-lg overflow-hidden border border-zinc-800 flex flex-col">
+                    <div class="aspect-video w-full overflow-hidden bg-black">
+                        <img 
+                            src={item.url} 
+                            alt="Southard Homes construction project" 
+                            class="w-full h-full object-cover hover:scale-102 transition-transform duration-300"
+                            loading="lazy"
+                        />
+                    </div>
+                    <div class="p-4 text-white mt-auto">
+                        <div class="flex justify-between items-center text-sm text-zinc-400">
+                            <span>📅 {item.date.toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' })}</span>
+                        </div>
+                    </div>
+                </div>
+            ))}
+        </div>
+    </Container>
+</Layout>
