@@ -32,10 +32,12 @@ const makeTitle = title
     <link rel="icon" type="image/svg+xml" href="/favicon.png" />
     <meta property="og:image" content="https://southardhomesllc.com/opengraph.jpg" />
 
+    <!-- GoatCounter Analytics  -->
     <script is:inline data-goatcounter="https://southard-analytics.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
     <script>
+      //Disable GoatCounter on localhost and staging environments
       if (window.location.host !== 'southardhomesllc.com')
-          window.goatcounter = {no_onload: true}
+          (window as any).goatcounter = {no_onload: true}
     </script>
     
     <SEO
