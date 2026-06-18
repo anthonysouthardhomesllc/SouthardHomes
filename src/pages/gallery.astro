@@ -58,10 +58,8 @@ const sortedGallery = galleryItems.sort((a: GalleryItem, b: GalleryItem) => b.da
       </Sectionhead>
     </div>
 
-    {/* FIXED: Added id="photo-gallery" so the light-box script knows which container tracks target items */}
     <div class="grid grid-cols-1 md:grid-cols-3 gap-6" id="photo-gallery">
       {sortedGallery.map((item) => (
-        /* FIXED: Wrapped items in anchor tags specifying large dimension properties */
         <a 
           href={item.largeUrl} 
           target="_blank" 
@@ -88,16 +86,17 @@ const sortedGallery = galleryItems.sort((a: GalleryItem, b: GalleryItem) => b.da
 </Layout>
 
 <script>
-  // Import PhotoSwipe styles and core controller assets directly into the client runtime
+  //Import PhotoSwipe styles and core controller assets directly into the client runtime
   import PhotoSwipeLightbox from 'photoswipe/lightbox';
   import 'photoswipe/style.css';
 
+  //Initialize the PhotoSwipe Lightbox with our gallery selector and configuration
   const lightbox = new PhotoSwipeLightbox({
     gallery: '#photo-gallery',
     children: 'a',
     pswpModule: () => import('photoswipe')
   });
   
-  // Initialize on page run
+  //Initialize on page run
   lightbox.init();
 </script>
