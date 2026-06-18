@@ -6,8 +6,6 @@ const {
   floorplanImg,
   fpAlt,
   floorplanName,
-  fpDescription,
-  basePrice,
   fpBeds,
   fpBath,
   fpGarage,
@@ -18,66 +16,73 @@ const {
 ---
 
 <div
-    id="cardBG"
-    class="max-w-xs min-w-[320px] rounded-xl overflow-hidden shadow-lg duration-700 hover:scale-105"
+  id="cardBG"
+  class="max-w-xs min-w-[320px] rounded-xl overflow-hidden shadow-lg duration-700 hover:scale-105"
 >
-  <img class="w-full" 
-  src={floorplanImg} 
-  alt={fpAlt}
-  loading="lazy"
-   />
+  <!-- Floorplan Image -->
+  <img
+    class="w-full"
+    src={floorplanImg}
+    alt={fpAlt}
+    loading="lazy"
+  />
 
+  <!-- Floorplan Content -->
   <div class="px-6 py-4 rounded">
+    <!-- Name -->
     <div class="flex flex-col sm:flex-row sm:justify-between mb-2">
-        <div class="text-xl font-bold">
-            {floorplanName}
-        </div>
+      <div class="text-xl font-bold">
+        {floorplanName}
+      </div>
     </div>
 
-    <div class="font-prose flex-1 flex items-center justify-between text-black">
+    <!-- Stats Row 1 -->
+    <div class="font-prose flex items-center justify-between text-black">
       <div class="flex gap-1 align-top">
         <b>{fpSqFt}</b> SqFt
       </div>
+
       <div class="flex gap-1 align-top">
         <b>{fpBeds}</b> Bed
       </div>
     </div>
 
-    <div class="font-prose flex-1 flex items-center justify-between text-black">
+    <!-- Stats Row 2 -->
+    <div class="font-prose flex items-center justify-between text-black">
       <div class="flex gap-1 align-top">
         <b>{fpBath}</b> Bath
       </div>
+
       <div class="flex gap-1 align-top">
         <b>{fpGarage}</b> Garage
       </div>
     </div>
   </div>
 
-  <div class="px-6 pt-4 hover:animate-pulse">
+  <!-- Floorplan Buttons -->
+  <div class="px-6 pt-4 pb-4 flex gap-2">
     <Link
-      size="lg"
+      size="sm"
       style="outline"
       rel="noopener"
       href={floorplanLink}
-      class="flex gap-1 items-center justify-center bg-[#ffca28] border-none drop-shadow-md"
+      class="flex-1 flex gap-1 items-center justify-center bg-[#ffca28] border-none hover:animate-pulse"
       target="_blank"
     >
       <Icon name="mdi:set-square" />
-      2D Floorplan
+      2D
     </Link>
-  </div>
 
-  <div class="px-6 pt-3 pb-4 hover:animate-pulse">
     <Link
-      size="lg"
+      size="sm"
       style="outline"
       rel="noopener"
       href={dfloorplanLink}
-      class="flex gap-1 items-center justify-center bg-[#ffca28] border-none drop-shadow-md"
+      class="flex-1 flex gap-1 items-center justify-center bg-[#ffca28] border-none hover:animate-pulse"
       target="_blank"
     >
       <Icon name="mdi:set-square" />
-      3D Floorplan
+      3D
     </Link>
   </div>
 </div>
