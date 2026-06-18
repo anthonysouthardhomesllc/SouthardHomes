@@ -1,60 +1,90 @@
 ---
 import { Icon } from "astro-icon/components";
 import Link from "./ui/link.astro";
-const { floorplanImg, fpAlt, floorplanName, fpDescription, basePrice, fpBeds, fpBath, fpGarage, fpSqFt, floorplanLink, dfloorplanLink } = Astro.props;
+
+const {
+  floorplanImg,
+  fpAlt,
+  floorplanName,
+  fpDescription,
+  basePrice,
+  fpBeds,
+  fpBath,
+  fpGarage,
+  fpSqFt,
+  floorplanLink,
+  dfloorplanLink
+} = Astro.props;
 ---
 
-<div id="cardBG" class="max-w-xs rounded-xl overflow-hidden shadow-lg duration-700 hover:scale-105">
-    <img class="w-full" src={floorplanImg} alt={fpAlt}>
-<div class="px-6 py-4 rounded">
-<div class="flex justify-between mb-2 items-baseline">
-    <div class="text-xl"><b>{floorplanName}</b></div>
-    <div class="text-andiron"><b>{basePrice}</b></div>
-</div>
-<div class="flex justify-between mb-2 items-baseline">
-    <div class="text-andiron italic font-light"><b>{fpDescription}</b></div>
-</div>
-<div id="floorplanFeatures" class="font-prose flex-1 flex items-center justify-between">
-    <div class="flex gap-1 align-top"><b>{fpSqFt}</b> SqFt</div>
-    <div class="flex gap-1 align-top"><b>{fpBeds}</b> Bed</div>
-    <div class="flex gap-1 align-top"><b>{fpBath}</b> Bath</div>
-    <div class="flex gap-1 align-top"><b>{fpGarage}</b> Garage</div>
-</div>
-</div>
-<div class="px-6 pt-4 hover:animate-pulse">
+<div
+    id="cardBG"
+    class="max-w-xs min-w-[320px] rounded-xl overflow-hidden shadow-lg duration-700 hover:scale-105"
+>
+  <img class="w-full" 
+  src={floorplanImg} 
+  alt={fpAlt}
+  loading="lazy"
+   />
+
+  <div class="px-6 py-4 rounded">
+    <div class="flex flex-col sm:flex-row sm:justify-between mb-2">
+        <div class="text-xl font-bold">
+            {floorplanName}
+        </div>
+    </div>
+
+    <div class="font-prose flex-1 flex items-center justify-between text-black">
+      <div class="flex gap-1 align-top">
+        <b>{fpSqFt}</b> SqFt
+      </div>
+      <div class="flex gap-1 align-top">
+        <b>{fpBeds}</b> Bed
+      </div>
+    </div>
+
+    <div class="font-prose flex-1 flex items-center justify-between text-black">
+      <div class="flex gap-1 align-top">
+        <b>{fpBath}</b> Bath
+      </div>
+      <div class="flex gap-1 align-top">
+        <b>{fpGarage}</b> Garage
+      </div>
+    </div>
+  </div>
+
+  <div class="px-6 pt-4 hover:animate-pulse">
     <Link
-        size="lg"
-        style="outline"
-        rel="noopener"
-        href={floorplanLink}
-        class="flex gap-1 items-center justify-center bg-[#ffca28] border-none drop-shadow-md"
-        target="_blank">
-        <Icon name="mdi:set-square" />
-         2D Floorplan
-      </Link>
-    </div>
-<div class="px-6 pt-3 pb-4 hover:animate-pulse">
-      <Link
-        size="lg"
-        style="outline"
-        rel="noopener"
-        href={dfloorplanLink}
-        class="flex gap-1 items-center justify-center bg-[#ffca28] border-none drop-shadow-md"
-        target="_blank">
-        <Icon name="mdi:set-square" />
-         3D Floorplan
-      </Link>
-    </div>
+      size="lg"
+      style="outline"
+      rel="noopener"
+      href={floorplanLink}
+      class="flex gap-1 items-center justify-center bg-[#ffca28] border-none drop-shadow-md"
+      target="_blank"
+    >
+      <Icon name="mdi:set-square" />
+      2D Floorplan
+    </Link>
+  </div>
+
+  <div class="px-6 pt-3 pb-4 hover:animate-pulse">
+    <Link
+      size="lg"
+      style="outline"
+      rel="noopener"
+      href={dfloorplanLink}
+      class="flex gap-1 items-center justify-center bg-[#ffca28] border-none drop-shadow-md"
+      target="_blank"
+    >
+      <Icon name="mdi:set-square" />
+      3D Floorplan
+    </Link>
+  </div>
 </div>
-</div>
-</div>
+
 <style>
-#cardBG {
+  #cardBG {
     background-color: rgba(248, 250, 252, 0.93) !important;
     color: black;
-}
-#floorplanFeatures {
-    color: #000000;
-    opacity: 0.8;
-}
-    </style>
+  }
+</style>
