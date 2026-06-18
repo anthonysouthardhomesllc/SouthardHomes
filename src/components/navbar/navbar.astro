@@ -40,7 +40,7 @@ const menuitems = [
       <Astronav>
         <!-- Logo and Mobile Toggle Row -->
         <div class="flex w-full lg:w-auto items-center justify-between px-4 lg:px-0">
-          <a href="/" class="flex items-center">
+          <a href="/" class="flex items-center" id="logo-link">
             <img 
               class="h-32 w-auto object-contain brightness-115" 
               src="/logo.png" 
@@ -113,31 +113,35 @@ const menuitems = [
 <style>
   /* Desktop Button Default Styles */
   #contact-desktop {
-    background-color: transparent;
+    background-color: #000000;
     color: #ffffff;
     border: 2px solid #ffffff !important;
     transition: all 0.3s ease;
   }
 
   #contact-desktop:hover {
-    background-color: #f3f4f6;
-    color: #000000;
+    font-size: large;
     border-color: #ffca28 !important;
+    color: #ffca28;
   }
 
   /* Mobile Button Styles */
   #contact-mobile {
-    font-size: large;
-    background-color: #ffffff;
-    color: #000000;
-    font-weight: bold;
+    background-color: #000000;
+    color: #ffffff;
     text-align: center;
     transition: background-color 0.3s ease;
-    width: 7em;
+    width: 8em;
   }
 
   #contact-mobile:hover {
-    background-color: #f3f4f6; /* Soft off-white for tap feedback */
+    font-size: large;
     border-color: #ffca28 !important;
+    color: #ffca28;
+  }
+
+  #logo-link:hover #logo {
+    border-color: #ffca28;
+    border-width: 2px;
   }
 </style>

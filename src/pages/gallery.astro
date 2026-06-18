@@ -9,7 +9,7 @@ const cloudName = import.meta.env.PUBLIC_CLOUDINARY_CLOUD_NAME || process.env.PU
 const apiKey = import.meta.env.SECRET_CLOUDINARY_API_KEY || process.env.SECRET_CLOUDINARY_API_KEY;
 const apiSecret = import.meta.env.SECRET_CLOUDINARY_API_SECRET || process.env.SECRET_CLOUDINARY_API_SECRET;
 
-// Define an interface for gallery items
+//Define an interface for gallery items
 interface GalleryItem {
   url: string;
   largeUrl: string;
@@ -17,6 +17,7 @@ interface GalleryItem {
   date: Date;
 }
 
+//Configure Cloudinary with the fetched credentials 
 cloudinary.config({
   cloud_name: cloudName,
   api_key: apiKey,
@@ -24,6 +25,7 @@ cloudinary.config({
   secure: true
 });
 
+//Fetch images from the specified Cloudinary folder, including context and metadata for sorting
 const { resources } = await cloudinary.search
   .expression('folder:SHLLC-Gallery')
   .with_field('context')  
@@ -31,6 +33,7 @@ const { resources } = await cloudinary.search
   .max_results(100)
   .execute();
 
+//Map the fetched resources to the GalleryItem interface, optimizing image URLs for thumbnails and extracting dates for sorting
 const galleryItems: GalleryItem[] = resources.map((image: any) => {
   const optimizedUrl = image.secure_url.replace(
     '/upload/',
@@ -47,6 +50,7 @@ const galleryItems: GalleryItem[] = resources.map((image: any) => {
   };
 });
 
+//Sort the gallery items by date in descending order to show the most recent images first
 const sortedGallery = galleryItems.sort((a: GalleryItem, b: GalleryItem) => b.date.getTime() - a.date.getTime());
 ---
 

@@ -1,10 +1,10 @@
-// 1. Import utilities from `astro:content` and `astro/loaders`
-import { defineCollection, z } from 'astro:content';
+// 1. Import definition utilities from the standard v6/v7 content endpoint
+import { defineCollection } from 'astro:content';
 import { glob } from 'astro/loaders'; 
+import { z } from 'astro/zod';
 
 // 2. Define your collection(s)
 const blogCollection = defineCollection({
-  // FIXED: Added the glob loader to look inside your blog folder
   loader: glob({ pattern: '**/[^_]*.{md,mdx}', base: "./src/content/blog" }),
   schema: z.object({
     draft: z.boolean(),
@@ -22,14 +22,13 @@ const blogCollection = defineCollection({
 });
 
 const teamCollection = defineCollection({
-  // FIXED: Added the glob loader to look inside your team folder
   loader: glob({ pattern: '**/[^_]*.{md,mdx}', base: "./src/content/team" }),
   schema: z.object({
     draft: z.boolean(),
     name: z.string(),
     title: z.string(),
     avatar: z.object({
-      src: z.string(),
+      src: z.string(), 
       alt: z.string(),
     }),
     publishDate: z.string().transform(str => new Date(str)),

@@ -4,11 +4,9 @@ import { Picture } from "astro:assets";
 import Layout from "@layouts/Layout.astro";
 import Container from "@components/container.astro";
 import Sectionhead from "@components/sectionhead.astro";
-import Image from "astro/components/Image.astro";
 
-// Filter team entries with 'draft: false' & date before current date
 const publishedTeamMembers: CollectionEntry<"team">[] = await getCollection("team", (entry: CollectionEntry<"team">) => {
-  return !entry.data.draft && entry.data.publishDate < new Date();
+  return !entry.data.draft;
 });
 ---
 
@@ -48,9 +46,11 @@ const publishedTeamMembers: CollectionEntry<"team">[] = await getCollection("tea
       <p class="text-lg leading-relaxed text-slate-500 text-center">
         We're not just building and selling homes; we're changing the landscape by investing (and re-investing) in our community, and building a new standard of quality in the Wabash Valley.
       </p>
-    </div>
+    </div> 
+    
     <div class="grid md:grid-cols-3 gap-10 mx-auto max-w-4xl mt-12">
       {
+        
         publishedTeamMembers.map((teamMemberEntry) => (
           <div class="group">
             <div class="w-full aspect-square">
@@ -60,7 +60,7 @@ const publishedTeamMembers: CollectionEntry<"team">[] = await getCollection("tea
                 sizes="(max-width: 800px) 100vw, 400px"
                 width={400}
                 height={400}
-                class="w-full rounded-md rounded transition group-hover:-translate-y-1 group-hover:shadow-xl bg-white object-cover object-center aspect-square"
+                class="w-full rounded-md transition group-hover:-translate-y-1 group-hover:shadow-xl bg-white object-cover object-center aspect-square"
               />
             </div>
 
