@@ -90,11 +90,8 @@ const {
       </div>
     </div>
 
-    <!-- Features -->
-    <div
-      id="listingFeatures"
-      class="font-prose flex-1 flex items-center justify-between"
-    >
+    <!-- Beds and Baths -->
+    <div class="font-prose flex-1 flex items-center justify-between bg-black">
       <div class="flex gap-1 align-top">
         <b>{lBeds}</b> Bed
       </div>
@@ -102,13 +99,16 @@ const {
       <div class="flex gap-1 align-top">
         <b>{lBath}</b> Bath
       </div>
+    </div>
 
+    <!-- Garage & SqFt -->
+    <div class="font-prose flex-1 flex items-center justify-between bg-black">
       <div class="flex gap-1 align-top">
-        <b>{lGarage}</b>
+        <b>{lsqFt}</b> SqFt
       </div>
 
       <div class="flex gap-1 align-top">
-        <b>{lsqFt}</b> SqFt
+        <b>{lGarage}</b>
       </div>
     </div>
 
@@ -162,9 +162,5 @@ const {
 }
 #badge {
     color: #00a877;
-}
-#listingFeatures {
-    color: #000000;
-    opacity: 0.8;
 }
 </style>
