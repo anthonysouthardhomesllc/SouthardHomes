@@ -64,7 +64,9 @@ import FloorplanCard from "@components/floorplanCard.astro";
             </div>
         </div>
 
-        <div class="mt-4 flex flex-wrap flex-col md:flex-row gap-4 md:mx-0 pl-4">
+        <div class="mt-4 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 
+            justify-items-center md:mx-0 pl-4" id="floorplan-gallery">
+
             <FloorplanCard
             floorplanImg="https://i.postimg.cc/rpfd7DcV/The-Sycamore.png"
             fpAlt="The Sycamore Floorplan" 
@@ -172,3 +174,16 @@ import FloorplanCard from "@components/floorplanCard.astro";
         <Cta />
     </Container>
   </Layout>
+
+  <script>
+  import PhotoSwipeLightbox from 'photoswipe/lightbox';
+  import 'photoswipe/style.css';
+
+  const lightbox = new PhotoSwipeLightbox({
+    gallery: '#floorplan-gallery',
+    children: 'a.pswp-link', //Explicitly targets ONLY the 2D/3D links, not the whole card image
+    pswpModule: () => import('photoswipe')
+  });
+  
+  lightbox.init();
+</script>
